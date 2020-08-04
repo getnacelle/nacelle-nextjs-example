@@ -1,26 +1,9 @@
-import { useEffect, useState } from 'react';
 import NacelleClient from '@nacelle/client-js-sdk';
-import Link from 'next/link';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+const Product = ({ product }) => {
+  return <div>Test</div>;
+};
 
-export default function Home() {
-  const [cart, updateCart] = useState([]);
-
-  return (
-    <div className={styles.container}>
-      <Head></Head>
-
-      <main>
-        <Link href="/products/alonso-shoes">
-          <a>Alonso Shoes</a>
-        </Link>
-      </main>
-    </div>
-  );
-}
-
-export async function getStaticProps(context) {
+async function getStaticPaths() {
   const settings = {
     id: 'rude-parrot-iBiKZQDPOa',
     token: '8638f8ca-4934-436e-80bd-851a710abc04',
@@ -38,8 +21,8 @@ export async function getStaticProps(context) {
   });
 
   console.log(product);
-
-  return {
-    props: { space, product }
-  };
 }
+
+// async function getStaticProps() {
+//   return { props: {} };
+// }
