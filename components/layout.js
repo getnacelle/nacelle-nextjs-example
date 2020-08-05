@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 
-import Header from '../Header/Header';
-import Cart from '../Cart/Cart';
+import Header from './header';
+import Cart from './cart';
 
 const Layout = ({ children, space }) => {
-  console.log('layout', space);
   return (
     <Fragment>
       <Head>

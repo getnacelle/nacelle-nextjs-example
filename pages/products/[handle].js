@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import $nacelle from 'services/nacelle';
 
 import useCart from 'hooks/use-cart';
-import Layout from '../../components/Layout/Layout';
-import * as styles from './[handle].styles';
+import { Layout } from 'components';
+import * as styles from 'styles/products.styles';
 
 const Product = ({ product, space }) => {
   const [, { addToCart, toggleCart }] = useCart();

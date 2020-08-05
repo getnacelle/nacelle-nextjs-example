@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
-import useCart from '../../hooks/use-cart';
-import * as styles from './Header.styles';
+import useCart from '../hooks/use-cart';
+import * as styles from './header.styles';
 
 const Header = ({ space }) => {
   const [, { toggleCart }] = useCart();

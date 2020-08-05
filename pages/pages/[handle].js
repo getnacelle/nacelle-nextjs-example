@@ -32,8 +32,8 @@ export async function getStaticProps({ params }) {
     return {
       props: { page }, // will be passed to the page component as props
     }
-  } catch(err) {
-    console.error(`Problem fetching page data:\n${err}`)
+  } catch {
+    console.warn(`Problem fetching page data for page with handle '${params.handle}'`)
     return { props: { page: null }}
   }
 }
