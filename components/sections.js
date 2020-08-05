@@ -9,13 +9,13 @@ export default function Sections({ sections }) {
     const type = section.sys.contentType.sys.id
     switch (type) {
       case "heroBanner": {
-        return <HeroBanner fields={section.fields} />
+        return <HeroBanner fields={section.fields} key={section.sys.id} />
       }
       case "sideBySide": {
-        return <SideBySide fields={section.fields} />
+        return <SideBySide fields={section.fields} key={section.sys.id} />
       }
       case "colectionGrid": {
-        return <CollectionGrid fields={section.fields} />
+        return <CollectionGrid fields={section.fields} key={section.sys.id} />
       }
     }
   })
