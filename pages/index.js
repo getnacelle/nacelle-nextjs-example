@@ -4,6 +4,16 @@ import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
+function ProductEntry({ product }) {
+  return (
+    <li>
+      <Link href={`/products/${product.handle}`}>
+        <a>{product.handle}</a>
+      </Link>
+    </li>
+  )
+}
+
 export default function Home({ products }) {
   const [cart, updateCart] = useState([]);
 
@@ -12,14 +22,11 @@ export default function Home({ products }) {
       <Head></Head>
 
       <main>
-        {products.map(product => {
-          const { id } = product
-            return (
-              <Link href={`/products/${product.handle}`}>
-                <a>{product.handle}</a>
-              </Link>
-            )
-        })}
+        <ul>
+          {products.map(product =>
+            <ProductEntry product={product} key={product.id} />
+          )}
+        </ul>
       </main>
     </div>
   );
