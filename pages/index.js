@@ -1,29 +1,24 @@
 import $nacelle from 'services/nacelle';
 import React from 'react';
-import styles from '../styles/Home.module.css';
-import { Sections } from 'components'
+import { Sections, Layout } from 'components';
 
-const circleStyle = {
-  width: 100,
-  height: 100,
-  borderRadius: '50%',
-  backgroundColor: 'darkorange'
-};
-
-export default function Home({ page }) {
+export default function Home({ page, space }) {
   return (
-    <div className={styles.container}>
-      <div css={circleStyle} />
-      <Sections sections={page.sections} />
-    </div>
+    <Layout space={space}>
+      <div>
+        <Sections sections={page.sections} />
+      </div>
+    </Layout>
   );
 }
 
 export async function getStaticProps() {
   try {
     const page = await $nacelle.data.page({ handle: 'homepage' });
+    const space = await $nacelle.data.space();
+
     return {
-      props: { page }
+      props: { page, space }
     };
   } catch (err) {
     console.error(`Error fetching data on homepage:\n${err}`);
