@@ -4,7 +4,11 @@ module.exports = {
     es2020: true,
     node: true
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended'
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -14,6 +18,8 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'react/prop-types': 0
+    'react/prop-types': 0,
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn'
   }
 };

@@ -15,6 +15,7 @@
   "devDependencies": {
     "@nacelle/client-js-sdk": "^1.0.5",
     "eslint": "^7.6.0",
-    "eslint-plugin-react": "^7.20.5"
+    "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react-hooks": "^4.0.8"
   }
 }
