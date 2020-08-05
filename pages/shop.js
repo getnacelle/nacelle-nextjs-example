@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 import $nacelle from 'services/nacelle';
 import Link from 'next/link';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+
+import { Layout } from 'components';
 
 function ProductEntry({ product }) {
   return (
@@ -11,32 +12,34 @@ function ProductEntry({ product }) {
         <a>{product.handle}</a>
       </Link>
     </li>
-  )
+  );
 }
 
-export default function Shop({ products }) {
+export default function Shop({ products, space }) {
   return (
-    <div className={styles.container}>
-      <Head></Head>
-      <main>
-        <ul>
-          {products.map(product =>
-            <ProductEntry product={product} key={product.id} />
-          )}
-        </ul>
-      </main>
-    </div>
+    <Layout space={space}>
+      <div>
+        <Head></Head>
+        <main>
+          <ul>
+            {products.map((product) => (
+              <ProductEntry product={product} key={product.id} />
+            ))}
+          </ul>
+        </main>
+      </div>
+    </Layout>
   );
 }
 
 export async function getStaticProps() {
   try {
     const space = await $nacelle.data.space();
-    const products = await $nacelle.data.allProducts()
+    const products = await $nacelle.data.allProducts();
     return {
       props: { space, products }
     };
-  } catch(err) {
-    console.error(`Error fetching products on homepage:\n${err}`)
+  } catch (err) {
+    console.error(`Error fetching products on homepage:\n${err}`);
   }
 }

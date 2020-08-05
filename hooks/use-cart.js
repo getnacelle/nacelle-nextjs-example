@@ -29,7 +29,7 @@ const cartReducer = (state, action) => {
         ...state,
         cart: isInCart(state.cart, action.payload)
           ? state.cart
-          : [...state.cart, { ...formatCartItem(action.payload), quantity: 1 }]
+          : [...state.cart, { ...formatCartItem(action.payload) }]
       };
     case REMOVE_FROM_CART:
       return {
@@ -119,6 +119,7 @@ function formatCartItem(item) {
     handle,
     productId,
     image,
+    quantity: item.quantity > 0 ? item.quantity : 1,
     ...variant
   };
 }

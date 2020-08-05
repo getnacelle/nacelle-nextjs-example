@@ -39,6 +39,6 @@ const nacelleClient = {
     blog: params => clientCMS.data.blog(params),
     blogPage: params => clientCMS.data.blogPage(params)
   }
-}
+};
 
 export default nacelleClient;
