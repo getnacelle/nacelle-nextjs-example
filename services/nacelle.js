@@ -1,8 +1,8 @@
 import NacelleClient from '@nacelle/client-js-sdk';
 
 const defaultSettings = {
-  id: 'rude-parrot-iBiKZQDPOa',
-  token: '8638f8ca-4934-436e-80bd-851a710abc04',
+  id: process.env.NACELLE_SPACE_ID,
+  token: process.env.NACELLE_GRAPHQL_TOKEN,
   nacelleEndpoint: 'https://hailfrequency.com/v2/graphql',
   locale: 'en-us'
 }
