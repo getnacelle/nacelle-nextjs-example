@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import NacelleClient from '@nacelle/client-js-sdk';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export default function Home({ products }) {
   const [cart, updateCart] = useState([]);
 
   return (
@@ -12,9 +12,14 @@ export default function Home() {
       <Head></Head>
 
       <main>
-        <Link href="/products/alonso-shoes">
-          <a>Alonso Shoes</a>
-        </Link>
+        {products.map(product => {
+          const { id } = product
+            return (
+              <Link href={`/products/${product.handle}`}>
+                <a>{product.handle}</a>
+              </Link>
+            )
+        })}
       </main>
     </div>
   );
@@ -26,20 +31,19 @@ export async function getStaticProps(context) {
     token: '8638f8ca-4934-436e-80bd-851a710abc04',
     locale: 'en-us',
     staticBasePath:
-      'https://nacelle-demo-sites-git-feature-dash-dash.nacelle.vercel.app/',
+      'https://nacelle-demo-store-data.s3.amazonaws.com/',
     nacelleEndpoint: 'https://hailfrequency.com/v2/graphql'
   };
 
   const client = new NacelleClient(settings);
   const space = await client.data.space();
-  // const product = await client.data.product({ handle: 'tanja-heel-sandals' });
-  const product = await client.data.products({
-    handles: ['alonso-shoes']
-  });
 
-  console.log(product);
-
-  return {
-    props: { space, product }
-  };
+  try {
+    const products = await client.data.allProducts()
+    return {
+      props: { space, products }
+    };
+  } catch(err) {
+    console.error(`Error fetching products on homepage:\n${err}`)
+  }
 }
