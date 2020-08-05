@@ -1,8 +1,8 @@
+import React from 'react'
 import $nacelle from 'services/nacelle';
-import React from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import Test from '../components/test';
 
 function ProductEntry({ product }) {
   return (
@@ -14,22 +14,23 @@ function ProductEntry({ product }) {
   )
 }
 
-export default function Home({ products }) {
+export default function Shop({ products }) {
   return (
     <div className={styles.container}>
-      <Test />
-      <br />
+      <Head></Head>
+      <main>
         <ul>
           {products.map(product =>
             <ProductEntry product={product} key={product.id} />
           )}
         </ul>
+      </main>
     </div>
   );
 }
 
 export async function getStaticProps() {
-    try {
+  try {
     const space = await $nacelle.data.space();
     const products = await $nacelle.data.allProducts()
     return {

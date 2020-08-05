@@ -1,28 +1,28 @@
-import React from 'react';
-import nacelleClient from '../../services/nacelle';
+import $nacelle from 'services/nacelle';
 
 const Product = ({ product }) => {
-  return <pre>{JSON.stringify(product, null, 2)}</pre>;
+  return <pre>{JSON.stringify(product)}</pre>;
 };
 
-export default Product;
+export default Product
 
 export async function getStaticPaths() {
-  const products = await nacelleClient.data.products({
-    handles: ['alonso-shoes']
-  });
-
-  return {
-    paths: products.map((product) => {
-      const { handle } = product;
-      return { params: { handle } };
-    }),
-    fallback: false // See the "fallback" section below
-  };
+  try {
+    const products = await $nacelle.data.allProducts()
+    return {
+      paths: products.map(product => {
+        const { handle } = product
+        return { params: { handle }}
+      }),
+      fallback: false // See the "fallback" section below
+    };
+  } catch(err) {
+    console.error(`Error fetching products on homepage:\n${err}`)
+  }  
 }
 
 export async function getStaticProps({ params }) {
-  const product = await nacelleClient.data.product({ handle: params.handle });
+  const product = await $nacelle.data.product({ handle: params.handle });
 
   return {
     props: { product } // will be passed to the page component as props
