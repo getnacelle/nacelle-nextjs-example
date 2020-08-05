@@ -1,7 +1,7 @@
 import $nacelle from 'services/nacelle.js'
 
 const Page = ({ page }) => {
-  return <pre>{JSON.stringify(page)}</pre>;
+  return page && <pre>{JSON.stringify(page)}</pre>;
 };
 
 export default Page
@@ -23,10 +23,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const page = await $nacelle.data.page({
-    handle: params.handle
-  });
-  return {
-    props: { page }, // will be passed to the page component as props
+  try {
+    const page = await $nacelle.data.page({
+      handle: params.handle
+    });
+
+    return {
+      props: { page }, // will be passed to the page component as props
+    }
+  } catch(err) {
+    console.error(`Problem fetching page data:\n${err}`)
+    return { props: { page: null }}
   }
 }
