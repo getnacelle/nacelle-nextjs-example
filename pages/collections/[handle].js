@@ -42,8 +42,8 @@ export async function getStaticProps({ params }) {
       .collection({
         handle: params.handle
       })
-  } catch {
-    console.warn(`Problem fetching collection data for collection page with handle '${params.handle}'`)
+  } catch(err) {
+    console.warn(`Problem fetching collection data for collection page with handle '${params.handle}':\n${err}`)
   }
 
   try {
@@ -51,8 +51,8 @@ export async function getStaticProps({ params }) {
       .page({
         handle: params.handle
       })
-  } catch {
-    console.warn(`Problem fetching page data for collection page with handle '${params.handle}'`)
+  } catch(err) {
+    console.warn(`Problem fetching page data for collection page with handle '${params.handle}':\n${err}`)
   }
 
   return {
