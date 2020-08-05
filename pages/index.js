@@ -1,7 +1,8 @@
 import $nacelle from 'services/nacelle';
 import React from 'react';
 import Link from 'next/link';
-import Test from '../components/test';
+
+import Layout from '../components/Layout/Layout';
 
 const circleStyle = {
   width: 100,
@@ -20,18 +21,20 @@ function ProductEntry({ product }) {
   );
 }
 
-export default function Home({ products }) {
+export default function Home({ products, space }) {
+  console.log({ space });
   return (
-    <div>
-      <div css={circleStyle} />
-      <Test />
-      <br />
-      <ul>
-        {products.map((product) => (
-          <ProductEntry product={product} key={product.id} />
-        ))}
-      </ul>
-    </div>
+    <Layout space={space}>
+      <div>
+        <div css={circleStyle} />
+        <br />
+        <ul>
+          {products.map((product) => (
+            <ProductEntry product={product} key={product.id} />
+          ))}
+        </ul>
+      </div>
+    </Layout>
   );
 }
 

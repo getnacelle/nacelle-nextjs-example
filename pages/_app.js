@@ -1,12 +1,13 @@
 import React from 'react';
-import Layout from '../components/Layout/Layout';
+
+import { CartProvider } from '../hooks/use-cart';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
+    <CartProvider>
       <Component {...pageProps} />
-    </Layout>
+    </CartProvider>
   );
 }
 

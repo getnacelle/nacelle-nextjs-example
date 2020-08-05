@@ -1,21 +1,21 @@
 import React from 'react';
 import Link from 'next/link';
+
 import useCart from '../../hooks/use-cart';
+import * as styles from './Header.styles';
 
-const navigation = [
-  { title: 'home', route: '/' },
-  { title: 'shop', route: '/shop' }
-];
-
-const Header = () => {
+const Header = ({ space }) => {
   const [, { toggleCart }] = useCart();
+  const navItems = space.linklists[0].links;
+
+  console.log('header', JSON.stringify(space, null, 2));
 
   return (
-    <header>
-      <strong>PRAIRIE WIND APPAREL</strong>
+    <header css={styles.header}>
+      <strong css={styles.name}>{space.name}</strong>
       <nav>
-        {navigation.map(({ title, route }, idx) => (
-          <Link href={route} key={`${title}-${idx}`}>
+        {navItems.map(({ title, to }, idx) => (
+          <Link href={to} key={`${title}-${idx}`}>
             <a>{title}</a>
           </Link>
         ))}
