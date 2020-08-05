@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import NacelleClient from '@nacelle/client-js-sdk';
+import $nacelle from 'services/nacelle';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
@@ -42,11 +42,10 @@ export async function getStaticProps(context) {
     nacelleEndpoint: 'https://hailfrequency.com/v2/graphql'
   };
 
-  const client = new NacelleClient(settings);
-  const space = await client.data.space();
+  const space = await $nacelle.data.space();
 
   try {
-    const products = await client.data.allProducts()
+    const products = await $nacelle.data.allProducts()
     return {
       props: { space, products }
     };
