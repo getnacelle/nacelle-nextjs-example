@@ -1,5 +1,3 @@
-require("dotenv").config()
-
 module.exports = {
   env: {
     NACELLE_SPACE_ID: process.env.NACELLE_SPACE_ID,
