@@ -1,6 +1,6 @@
+import React from 'react';
 import Head from 'next/head';
 
-import React from 'react';
 import Header from '../Header/Header';
 import Cart from '../Cart/Cart';
 import { CartProvider } from '../../hooks/use-cart';
