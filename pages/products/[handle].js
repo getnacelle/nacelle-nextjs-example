@@ -1,3 +1,4 @@
+import React from 'react'
 import $nacelle from 'services/nacelle';
 
 const Product = ({ product }) => {
