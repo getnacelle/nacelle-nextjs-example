@@ -1,7 +1,6 @@
 import $nacelle from 'services/nacelle';
 import React from 'react';
 import Link from 'next/link';
-import styles from '../styles/Home.module.css';
 import Test from '../components/test';
 
 const circleStyle = {
@@ -23,7 +22,7 @@ function ProductEntry({ product }) {
 
 export default function Home({ products }) {
   return (
-    <div className={styles.container}>
+    <div>
       <div css={circleStyle} />
       <Test />
       <br />
