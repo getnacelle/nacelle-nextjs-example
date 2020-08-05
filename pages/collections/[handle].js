@@ -7,7 +7,7 @@ const Collection = ({ collection, page }) => {
   const products = useCollection(collection)
   return (
     <>
-      <Sections sections={page.sections} />
+      {page && <Sections sections={page.sections} />}
       <ProductGallery>
         {products.map(product => (
           <ProductCard product={product} key={product.id} linkToPDP />)
@@ -35,15 +35,27 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const collection = await $nacelle.data.collection({
-    handle: params.handle
-  })
+  let collection, page
+  
+  try {
+    collection = await $nacelle.data
+      .collection({
+        handle: params.handle
+      })
+  } catch {
+    console.warn(`Problem fetching collection data for collection page with handle '${params.handle}'`)
+  }
 
-  const page = await $nacelle.data.page({
-    handle: params.handle
-  })
+  try {
+    page = await $nacelle.data
+      .page({
+        handle: params.handle
+      })
+  } catch {
+    console.warn(`Problem fetching page data for collection page with handle '${params.handle}'`)
+  }
 
   return {
-    props: { collection, page }, // will be passed to the page component as props
+    props: { collection, page: page || null }, // will be passed to the page component as props
   }
 }
