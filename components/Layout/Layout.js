@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Header from '../Header/Header';
 import Cart from '../Cart/Cart';
-import { CartProvider } from '../../hooks/use-cart';
+import { CartProvider } from 'hooks/use-cart';
 
 const Layout = ({ children }) => {
   return (

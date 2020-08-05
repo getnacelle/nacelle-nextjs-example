@@ -1,8 +1,7 @@
 import $nacelle from 'services/nacelle';
 import React from 'react';
-import Link from 'next/link';
 import styles from '../styles/Home.module.css';
-import Test from '../components/test';
+import { Sections } from 'components'
 
 const circleStyle = {
   width: 100,
@@ -11,39 +10,22 @@ const circleStyle = {
   backgroundColor: 'darkorange'
 };
 
-function ProductEntry({ product }) {
-  return (
-    <li>
-      <Link href={`/products/${product.handle}`}>
-        <a>{product.handle}</a>
-      </Link>
-    </li>
-  );
-}
-
-export default function Home({ products }) {
+export default function Home({ page }) {
   return (
     <div className={styles.container}>
       <div css={circleStyle} />
-      <Test />
-      <br />
-      <ul>
-        {products.map((product) => (
-          <ProductEntry product={product} key={product.id} />
-        ))}
-      </ul>
+      <Sections sections={page.sections} />
     </div>
   );
 }
 
 export async function getStaticProps() {
   try {
-    const space = await $nacelle.data.space();
-    const products = await $nacelle.data.allProducts();
+    const page = await $nacelle.data.page({ handle: 'homepage' });
     return {
-      props: { space, products }
+      props: { page }
     };
   } catch (err) {
-    console.error(`Error fetching products on homepage:\n${err}`);
+    console.error(`Error fetching data on homepage:\n${err}`);
   }
 }
