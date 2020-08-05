@@ -1,4 +1,5 @@
-import NacelleClient from '@nacelle/client-js-sdk';
+import React from 'react'
+import $nacelle from 'services/nacelle';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
@@ -28,21 +29,10 @@ export default function Shop({ products }) {
   );
 }
 
-export async function getStaticProps(context) {
-  const settings = {
-    id: 'rude-parrot-iBiKZQDPOa',
-    token: '8638f8ca-4934-436e-80bd-851a710abc04',
-    locale: 'en-us',
-    staticBasePath:
-      'https://nacelle-demo-store-data.s3.amazonaws.com/',
-    nacelleEndpoint: 'https://hailfrequency.com/v2/graphql'
-  };
-
-  const client = new NacelleClient(settings);
-  const space = await client.data.space();
-
+export async function getStaticProps() {
   try {
-    const products = await client.data.allProducts()
+    const space = await $nacelle.data.space();
+    const products = await $nacelle.data.allProducts()
     return {
       props: { space, products }
     };

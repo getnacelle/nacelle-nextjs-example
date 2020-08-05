@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import $nacelle from 'services/nacelle';
+import React from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import Test from '../components/test';
 
 function ProductEntry({ product }) {
   return (
@@ -15,36 +15,22 @@ function ProductEntry({ product }) {
 }
 
 export default function Home({ products }) {
-  const [cart, updateCart] = useState([]);
-
   return (
     <div className={styles.container}>
-      <Head></Head>
-
-      <main>
+      <Test />
+      <br />
         <ul>
           {products.map(product =>
             <ProductEntry product={product} key={product.id} />
           )}
         </ul>
-      </main>
     </div>
   );
 }
 
-export async function getStaticProps(context) {
-  const settings = {
-    id: 'rude-parrot-iBiKZQDPOa',
-    token: '8638f8ca-4934-436e-80bd-851a710abc04',
-    locale: 'en-us',
-    staticBasePath:
-      'https://nacelle-demo-store-data.s3.amazonaws.com/',
-    nacelleEndpoint: 'https://hailfrequency.com/v2/graphql'
-  };
-
-  const space = await $nacelle.data.space();
-
-  try {
+export async function getStaticProps() {
+    try {
+    const space = await $nacelle.data.space();
     const products = await $nacelle.data.allProducts()
     return {
       props: { space, products }
