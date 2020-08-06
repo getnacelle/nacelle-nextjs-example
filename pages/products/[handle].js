@@ -94,7 +94,7 @@ function formatCurrency(price, currency = '$') {
 }
 
 function stripHtml(str) {
-  return str.replace(/(<([^>]+)>)/gi, '');
+  return str && str.replace(/(<([^>]+)>)/gi, '');
 }
 
 export async function getStaticPaths() {
