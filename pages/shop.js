@@ -1,12 +1,10 @@
 import React from 'react';
 import $nacelle from 'services/nacelle';
-import Head from 'next/head';
 import { Sections, ProductGallery, ProductCard } from 'components';
 
 export default function Shop({ page, products }) {
   return (
     <>
-      <Head></Head>
       <main>
         {page && <Sections sections={page.sections} />}
         <ProductGallery>
