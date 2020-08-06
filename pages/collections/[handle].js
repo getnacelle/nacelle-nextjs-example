@@ -1,10 +1,10 @@
-import React from 'react'
-import useCollection from 'hooks/use-collection'
-import $nacelle from 'services/nacelle.js'
-import { ProductGallery, ProductCard, Sections } from 'components'
+import React from 'react';
+import $nacelle from 'services/nacelle.js';
+import { useCollection } from 'hooks';
+import { Sections, ProductGallery, ProductCard } from 'components';
 
 const Collection = ({ collection, page }) => {
-  const products = useCollection(collection)
+  const products = useCollection(collection);
   return (
     <>
       {page && <Sections sections={page.sections} />}
@@ -17,7 +17,7 @@ const Collection = ({ collection, page }) => {
   )
 };
 
-export default Collection
+export default Collection;
 
 export async function getStaticPaths() {
   try {
@@ -57,5 +57,5 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { collection, page: page || null }, // will be passed to the page component as props
-  }
+  };
 }
