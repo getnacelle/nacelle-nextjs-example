@@ -1,13 +1,13 @@
 import React from 'react';
 import Head from 'next/head';
 import { CartProvider } from 'hooks/use-cart';
-import { Header, Cart } from 'components';
+import { Header, Cart, Footer } from 'components';
 
 const Layout = ({ children, space }) => {
   return (
     <CartProvider>
       <Head>
-        <title>My page title</title>
+        <title>{space.name}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link
           href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+Pro:wght@300;400;600&display=swap"
@@ -17,10 +17,7 @@ const Layout = ({ children, space }) => {
       <Header space={space} />
       <Cart />
       <main>{children}</main>
-      <footer>
-        <span>Prairie Wind Apparel</span>
-        <span>&#169; 2020</span>
-      </footer>
+      <Footer space={space} />
     </CartProvider>
   );
 };

@@ -31,16 +31,26 @@ const cartReducer = (state, action) => {
           ? state.cart
           : [...state.cart, { ...formatCartItem(action.payload) }]
       };
-    case REMOVE_FROM_CART:
+    case REMOVE_FROM_CART: {
+      const payloadId = action.payload.variant
+        ? action.payload.variant.id
+        : action.payload.id;
+
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload.variant.id)
+        cart: state.cart.filter((item) => item.id !== payloadId)
       };
+    }
+
     case INCREMENT_ITEM:
       return {
         ...state,
         cart: state.cart.map((item) => {
-          if (item.id === action.payload.variant.id) {
+          const payloadId = action.payload.variant
+            ? action.payload.variant.id
+            : action.payload.id;
+
+          if (item.id === payloadId) {
             return { ...item, quantity: item.quantity + 1 };
           }
 
@@ -51,7 +61,11 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         cart: state.cart.map((item) => {
-          if (item.id === action.payload.variant.id) {
+          const payloadId = action.payload.variant
+            ? action.payload.variant.id
+            : action.payload.id;
+
+          if (item.id === payloadId) {
             return {
               ...item,
               quantity: item.quantity >= 1 ? item.quantity - 1 : item.quantity
@@ -113,14 +127,14 @@ function formatCartItem(item) {
   const { featuredMedia: image, ...variant } = item.variant;
 
   return {
+    ...variant,
     title,
     vendor,
     tags,
     handle,
     productId,
     image,
-    quantity: item.quantity > 0 ? item.quantity : 1,
-    ...variant
+    quantity: item.quantity > 0 ? item.quantity : 1
   };
 }
 

@@ -3,6 +3,7 @@ import $nacelle from 'services/nacelle';
 import { Image } from 'components';
 
 import { useAddToCart } from 'hooks';
+import { formatCurrency } from 'utils';
 import * as styles from 'styles/products.styles';
 
 const ProductDetail = ({ product }) => {
@@ -15,8 +16,6 @@ const ProductDetail = ({ product }) => {
 
   const incrementQty = () => setQuantity((qty) => qty + 1);
   const decrementQty = () => setQuantity((qty) => (qty > 0 ? qty - 1 : 0));
-
-  // console.log(JSON.stringify(product, null, 2));
 
   return (
     <div css={styles.layout}>
@@ -84,10 +83,6 @@ const ProductDetail = ({ product }) => {
 };
 
 export default ProductDetail;
-
-function formatCurrency(price, currency = '$') {
-  return `${currency}${parseInt(price).toFixed(2)}`;
-}
 
 function stripHtml(str) {
   return str && str.replace(/(<([^>]+)>)/gi, '');
