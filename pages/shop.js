@@ -1,28 +1,19 @@
 import React from 'react';
 import $nacelle from 'services/nacelle';
-import Link from 'next/link';
 import Head from 'next/head';
+import { Sections, ProductGallery, ProductCard } from 'components';
 
-function ProductEntry({ product }) {
-  return (
-    <li>
-      <Link href={`/products/${product.handle}`}>
-        <a>{product.handle}</a>
-      </Link>
-    </li>
-  );
-}
-
-export default function Shop({ products }) {
+export default function Shop({ page, products }) {
   return (
     <>
       <Head></Head>
       <main>
-        <ul>
+        {page && <Sections sections={page.sections} />}
+        <ProductGallery>
           {products.map((product) => (
-            <ProductEntry product={product} key={product.id} />
+            <ProductCard product={product} key={product.id} linkToPDP />
           ))}
-        </ul>
+        </ProductGallery>
       </main>
     </>
   );
@@ -31,8 +22,9 @@ export default function Shop({ products }) {
 export async function getStaticProps() {
   try {
     const products = await $nacelle.data.allProducts();
+    const page = await $nacelle.data.page({ handle: 'shop' });
     return {
-      props: { products }
+      props: { products, page }
     };
   } catch (err) {
     console.error(`Error fetching products on homepage:\n${err}`);
