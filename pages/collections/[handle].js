@@ -41,18 +41,18 @@ export async function getStaticProps({ params }) {
     collection = await $nacelle.data
       .collection({
         handle: params.handle
-      })
+      });
   } catch(err) {
-    console.warn(`Problem fetching collection data for collection page with handle '${params.handle}':\n${err}`)
+    console.warn(`Can't find collection with handle '${params.handle}'`)
   }
 
   try {
     page = await $nacelle.data
       .page({
         handle: params.handle
-      })
+      });
   } catch(err) {
-    console.warn(`Problem fetching page data for collection page with handle '${params.handle}':\n${err}`)
+    console.warn(`Can't find page with handle '${params.handle}'`)
   }
 
   return {
