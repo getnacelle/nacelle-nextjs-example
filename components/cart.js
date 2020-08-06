@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useCheckout } from '@nacelle/nacelle-react-hooks';
 import { ItemQuantity } from 'components';
 import { formatCurrency } from 'utils';
 import { useCart } from 'hooks';
 import * as styles from './cart.styles';
 
+const checkoutCredentials = {
+  nacelle_space_id: process.env.NACELLE_SPACE_ID,
+  nacelle_graphql_token: process.env.NACELLE_GRAPHQL_TOKEN
+};
+
 const Cart = () => {
   const [{ cart, show }, cartActions] = useCart();
+  const [checkoutData, getCheckoutData, isCheckingOut] = useCheckout(
+    checkoutCredentials,
+    cart.map((item) => ({ variant: { ...item, qty: item.quantity } }))
+  );
+
+  useEffect(() => {
+    if (checkoutData) {
+      const { processCheckout } = checkoutData.data.data;
+      window.location = processCheckout.url;
+    }
+  }, [checkoutData]);
+
   const cartStateStyle = show ? styles.show : styles.hide;
+  const checkout = () => getCheckoutData();
 
   return (
     <div css={[styles.cart, cartStateStyle, !show && { boxShadow: 'none' }]}>
@@ -31,8 +50,12 @@ const Cart = () => {
           <span css={styles.subtotalPrice}>{calculateSubTotal(cart)}</span>
         </h4>
       </footer>
-      <button disabled={cart.length === 0} css={styles.checkoutButton}>
-        Checkout
+      <button
+        onClick={checkout}
+        disabled={cart.length === 0 || isCheckingOut}
+        css={styles.checkoutButton}
+      >
+        {isCheckingOut ? 'Processing Cart...' : 'Checkout'}
       </button>
     </div>
   );
