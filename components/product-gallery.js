@@ -2,12 +2,12 @@ import React from 'react';
 
 const galleryStyles = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(22em, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(25em, 1fr))',
   marginLeft: '0',
-  marginTop: '2em',
-  gridRowGap: '2em',
-  justifyItems: 'center',
-  justifyContent: 'center'
+  marginTop: '4em',
+  marginBottom: '4em',
+  gridRowGap: '10em',
+  placeItems: 'center'
 };
 
 const ProductGallery = ({ children }) => (

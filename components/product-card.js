@@ -46,7 +46,7 @@ const ProductCard = ({ product, linkToPDP }) => {
           <img
             src={product.featuredMedia.src}
             alt="something"
-            css={{ width: '300px' }}
+            css={{ maxWidth: '320px' }}
           />
         </LinkPDP>
 
