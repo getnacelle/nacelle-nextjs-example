@@ -8,8 +8,6 @@ const Header = ({ space }) => {
   const [, { toggleCart }] = useCart();
   const navItems = space.linklists[0].links;
 
-  console.log('header', JSON.stringify(space, null, 2));
-
   return (
     <header css={styles.header}>
       <strong css={styles.name}>{space.name}</strong>
