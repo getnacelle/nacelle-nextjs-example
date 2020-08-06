@@ -20,5 +20,25 @@ export const nav = {
 };
 
 export const navLink = {
-  color: '#3b3b3b'
+  color: '#3b3b3b',
+  fontSize: 15,
+  letterSpacing: '0.27px',
+  padding: 16,
+  cursor: 'pointer',
+  textDecoration: 'none',
+  textTransform: 'uppercase'
+};
+
+export const cartButton = {
+  outline: 0,
+  border: 0,
+  cursor: 'pointer',
+  background: 'none',
+  color: '#3b3b3b',
+  padding: '0 6px'
+};
+
+export const cartIcon = {
+  width: 32,
+  height: 32
 };
