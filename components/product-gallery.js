@@ -1,16 +1,17 @@
-import React from 'react'
+import React from 'react';
 
 const galleryStyles = {
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(22em, 1fr))',
   marginLeft: '0',
+  marginTop: '2em',
   gridRowGap: '2em',
   justifyItems: 'center',
   justifyContent: 'center'
-}
+};
 
 const ProductGallery = ({ children }) => (
   <div css={galleryStyles}>{children}</div>
-)
+);
 
-export default ProductGallery
+export default ProductGallery;
