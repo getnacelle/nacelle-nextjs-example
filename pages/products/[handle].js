@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import $nacelle from 'services/nacelle';
+import { Image } from 'components';
 
 import { useAddToCart } from 'hooks';
 import * as styles from 'styles/products.styles';
@@ -21,10 +22,12 @@ const ProductDetail = ({ product }) => {
     <div css={styles.layout}>
       <section css={styles.productGridLayout}>
         <div css={styles.column}>
-          <img
+          <Image
             src={productMedia.src}
-            alt="something"
-            css={styles.productImage}
+            alt={productMedia.altText}
+            styles={styles.productImage}
+            width="600"
+            format={['webp', 'jpg']}
           />
         </div>
         <div css={styles.column}>
