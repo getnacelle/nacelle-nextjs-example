@@ -11,7 +11,8 @@ export const productGridLayout = {
 };
 
 export const column = {
-  maxWidth: '50vw'
+  maxWidth: '50vw',
+  marginTop: '1.33em'
 };
 
 export const productImage = {

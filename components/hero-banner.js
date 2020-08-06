@@ -1,20 +1,33 @@
-import React from 'react'
+import React from 'react';
 
-const heroStyles = fields => ({
-  display: 'grid',
-  placeItems: 'center',
-  backgroundImage: `url(${fields.featuredMedia.fields.file.url})`,
-  height: '70vh',
-  marginTop: '2em',
-  marginBottom: '6em'
-})
+const heroStyles = {
+  block: {
+    display: 'grid',
+    placeItems: 'center',
+    marginBottom: '-0.33em'
+  },
+  image: {
+    width: '100vw',
+    objectFit: 'fill'
+  },
+  title: (color) => ({
+    position: 'absolute',
+    color: color,
+    fontSize: '4em',
+    textShadow: '1px 2px darkslategray'
+  })
+};
 
-const HeroBanner = ({ fields }) => {
+const HeroBanner = ({ fields, textColor }) => {
+  const image = fields.featuredMedia.fields;
   return (
-    <div css={heroStyles(fields)}>
-      <h1>{fields.title}</h1>
+    <div css={heroStyles.block}>
+      <picture>
+        <img src={image.file.url} css={heroStyles.image} />
+      </picture>
+      <h1 css={heroStyles.title(textColor || '#222')}>{fields.title}</h1>
     </div>
-  )
-}
+  );
+};
 
-export default HeroBanner
+export default HeroBanner;

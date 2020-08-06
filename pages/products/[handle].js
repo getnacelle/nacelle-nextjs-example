@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
 import $nacelle from 'services/nacelle';
 
-import { useCart } from 'hooks';
+import { useAddToCart } from 'hooks';
 import * as styles from 'styles/products.styles';
 
-const Product = ({ product }) => {
-  const [, { addToCart, toggleCart }] = useCart();
+const ProductDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(0);
 
   const productMedia = product.media[0];
   const productVariant = product.variants[0];
 
-  const addItemToCart = () => {
-    const item = { ...product, variant: productVariant, quantity };
-
-    addToCart(item);
-    return toggleCart();
-  };
+  const addItemToCart = useAddToCart(product, productVariant, quantity);
 
   const incrementQty = () => setQuantity((qty) => qty + 1);
   const decrementQty = () => setQuantity((qty) => (qty > 0 ? qty - 1 : 0));
@@ -62,13 +56,12 @@ const Product = ({ product }) => {
           <h4 css={styles.gettingTitle}>WHAT YOU&apos;RE GETTING</h4>
           <p css={styles.gettingText}>
             Run a manual sweep of anomalous airborne or electromagnetic
-            readings. Radiation levels in our atmosphere have increased by
-            3,000 percent. Electromagnetic and subspace wave fronts
-            approaching synchronization. What is the strength of the
-            ship&apos;s deflector shields at maximum output? The
-            wormhole&apos;s size and short period would make this a local
-            phenomenon. Do you have sufficient data to compile a holographic
-            simulation?
+            readings. Radiation levels in our atmosphere have increased by 3,000
+            percent. Electromagnetic and subspace wave fronts approaching
+            synchronization. What is the strength of the ship&apos;s deflector
+            shields at maximum output? The wormhole&apos;s size and short period
+            would make this a local phenomenon. Do you have sufficient data to
+            compile a holographic simulation?
           </p>
         </div>
         <div css={{ padding: 48, backgroundColor: '#f5f5f5' }}>
@@ -87,7 +80,7 @@ const Product = ({ product }) => {
   );
 };
 
-export default Product;
+export default ProductDetail;
 
 function formatCurrency(price, currency = '$') {
   return `${currency}${parseInt(price).toFixed(2)}`;

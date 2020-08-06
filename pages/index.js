@@ -5,7 +5,10 @@ import { Sections } from 'components';
 export default function Home({ page }) {
   return (
     <>
-      <Sections sections={page.sections} />
+      <Sections
+        sections={page.sections}
+        options={{ heroBanner: { textColor: '#ffffff' } }}
+      />
     </>
   );
 }
