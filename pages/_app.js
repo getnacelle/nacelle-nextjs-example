@@ -1,12 +1,15 @@
 import React from 'react';
 
 import { CartProvider } from '../hooks/use-cart';
+import { Layout } from 'components';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
     <CartProvider>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </CartProvider>
   );
 }
