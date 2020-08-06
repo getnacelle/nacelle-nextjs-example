@@ -1,10 +1,8 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
+import { Header, Cart } from 'components';
 
-import Header from './header';
-import Cart from './cart';
-
-const Layout = ({ children, space }) => {
+const Layout = ({ children }) => {
   return (
     <Fragment>
       <Head>
@@ -15,7 +13,7 @@ const Layout = ({ children, space }) => {
           rel="stylesheet"
         ></link>
       </Head>
-      <Header space={space} />
+      <Header />
       <Cart />
       <main>{children}</main>
       <footer>
