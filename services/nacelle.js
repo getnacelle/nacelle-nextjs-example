@@ -44,15 +44,12 @@ const nacelleClient = {
   }
 };
 
-console.log(`GITHUB COMMIT BRANCH: ${process.env.VERCEL_GITHUB_COMMIT_BRANCH}`);
-console.log(`GITHUB COMMIT REF: ${process.env.VERCEL_GITHUB_COMMIT_REF}`);
 if (
   (process.env.NACELLE_PREVIEW_MODE ||
     process.env.VERCEL_GITHUB_COMMIT_REF === 'preview') &&
   process.env.CONTENTFUL_PREVIEW_SPACE_ID &&
   process.env.CONTENTFUL_PREVIEW_API_TOKEN
 ) {
-  console.log('RUNNING NACELLE IN PREVIEW MODE');
   // Initialize the Preview Connector
   // Note: the Contentful Preview API token is not the same as your Content Delivery API token
   const previewConnector = new NacelleContentfulPreviewConnector({
@@ -66,6 +63,8 @@ if (
   nacelleClient.data.article = (params) => previewConnector.article(params);
   nacelleClient.data.articles = (params) => previewConnector.articles(params);
   nacelleClient.data.blog = (params) => previewConnector.blog(params);
+
+  console.log('RUNNING NACELLE IN PREVIEW MODE');
 }
 
 export default nacelleClient;
