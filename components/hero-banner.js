@@ -4,7 +4,7 @@ const heroStyles = {
   block: {
     display: 'grid',
     placeItems: 'center',
-    marginBottom: '6em'
+    marginBottom: '-0.33em'
   },
   image: {
     width: '100vw',

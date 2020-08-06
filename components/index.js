@@ -5,3 +5,4 @@ export { default as Layout } from './layout';
 export { default as ProductCard } from './product-card';
 export { default as ProductGallery } from './product-gallery';
 export { default as Sections } from './sections';
+export { default as SideBySide } from './side-by-side';

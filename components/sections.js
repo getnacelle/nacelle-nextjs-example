@@ -1,7 +1,6 @@
 import React from 'react';
-import { HeroBanner } from 'components';
+import { HeroBanner, SideBySide } from 'components';
 
-const SideBySide = ({ fields }) => <h1>SIDE BY SIDE</h1>;
 const CollectionGrid = ({ fields }) => <h1>COLLECTION GRID</h1>;
 
 export default function Sections({ sections, options }) {
