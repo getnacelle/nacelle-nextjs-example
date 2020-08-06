@@ -1,24 +1,21 @@
 import $nacelle from 'services/nacelle';
 import React from 'react';
-import { Sections, Layout } from 'components';
+import { Sections } from 'components';
 
-export default function Home({ page, space }) {
+export default function Home({ page }) {
   return (
-    <Layout space={space}>
-      <div>
-        <Sections sections={page.sections} />
-      </div>
-    </Layout>
+    <>
+      <Sections sections={page.sections} />
+    </>
   );
 }
 
 export async function getStaticProps() {
   try {
     const page = await $nacelle.data.page({ handle: 'homepage' });
-    const space = await $nacelle.data.space();
 
     return {
-      props: { page, space }
+      props: { page }
     };
   } catch (err) {
     console.error(`Error fetching data on homepage:\n${err}`);
