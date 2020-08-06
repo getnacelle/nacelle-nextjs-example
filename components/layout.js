@@ -1,12 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Head from 'next/head';
-
-import Header from './header';
-import Cart from './cart';
+import { CartProvider } from 'hooks/use-cart';
+import { Header, Cart } from 'components';
 
 const Layout = ({ children, space }) => {
   return (
-    <Fragment>
+    <CartProvider>
       <Head>
         <title>My page title</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -22,7 +21,7 @@ const Layout = ({ children, space }) => {
         <span>Prairie Wind Apparel</span>
         <span>&#169; 2020</span>
       </footer>
-    </Fragment>
+    </CartProvider>
   );
 };
 

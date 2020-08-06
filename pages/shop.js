@@ -3,8 +3,6 @@ import $nacelle from 'services/nacelle';
 import Link from 'next/link';
 import Head from 'next/head';
 
-import { Layout } from 'components';
-
 function ProductEntry({ product }) {
   return (
     <li>
@@ -15,29 +13,26 @@ function ProductEntry({ product }) {
   );
 }
 
-export default function Shop({ products, space }) {
+export default function Shop({ products }) {
   return (
-    <Layout space={space}>
-      <div>
-        <Head></Head>
-        <main>
-          <ul>
-            {products.map((product) => (
-              <ProductEntry product={product} key={product.id} />
-            ))}
-          </ul>
-        </main>
-      </div>
-    </Layout>
+    <>
+      <Head></Head>
+      <main>
+        <ul>
+          {products.map((product) => (
+            <ProductEntry product={product} key={product.id} />
+          ))}
+        </ul>
+      </main>
+    </>
   );
 }
 
 export async function getStaticProps() {
   try {
-    const space = await $nacelle.data.space();
     const products = await $nacelle.data.allProducts();
     return {
-      props: { space, products }
+      props: { products }
     };
   } catch (err) {
     console.error(`Error fetching products on homepage:\n${err}`);
