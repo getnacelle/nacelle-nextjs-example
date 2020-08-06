@@ -1,44 +1,80 @@
-import React from 'react'
-import Link from 'next/link'
-
-function formatPrice(product, price) {
-  return new Intl
-    .NumberFormat(product.locale, { style: 'currency', currency: product.priceRange.currencyCode })
-    .format(price)
-}
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useAddToCart, useFormatPrice } from 'hooks';
+import * as styles from 'styles/products.styles';
 
 const LinkPDP = ({ linkToPDP, children }) => {
   if (linkToPDP) {
     return (
       <Link href={linkToPDP}>
-        <a>{children}</a>
+        <a
+          css={{
+            textDecoration: 'none',
+            color: '#000000',
+            cursor: 'pointer'
+          }}
+        >
+          {children}
+        </a>
       </Link>
-    )
+    );
   } else {
-    return children
+    return children;
   }
-}
+};
 
 const ProductCard = ({ product, linkToPDP }) => {
-  const minPrice = formatPrice(product, product.priceRange.min)
-  const maxPrice = formatPrice(product, product.priceRange.max)
-  const price = product.priceRange.min === product.priceRange.max
-    ? minPrice
-    : `$${minPrice} - $${maxPrice}`
+  const [quantity, setQuantity] = useState(0);
+  const minPrice = useFormatPrice(product, product.priceRange.min);
+  const maxPrice = useFormatPrice(product, product.priceRange.max);
+  const price =
+    product.priceRange.min === product.priceRange.max
+      ? minPrice
+      : `$${minPrice} - $${maxPrice}`;
+
+  const productVariant = product.variants[0];
+
+  const addItemToCart = useAddToCart(product, productVariant, quantity);
+
+  const incrementQty = () => setQuantity((qty) => qty + 1);
+  const decrementQty = () => setQuantity((qty) => (qty > 0 ? qty - 1 : 0));
 
   return (
     <article>
-      <LinkPDP linkToPDP={linkToPDP ? `/products/${product.handle}` : null}>
-        <>
-          <picture>
-            <img src={product.featuredMedia.src} css={{width: '300px'}} />
-          </picture>
-          <h4>{product.title}</h4>
-          <p>{price}</p>
-        </>
-      </LinkPDP>
-    </article>
-  )
-}
+      <div css={styles.column}>
+        <LinkPDP linkToPDP={linkToPDP ? `/products/${product.handle}` : null}>
+          <img
+            src={product.featuredMedia.src}
+            alt="something"
+            css={{ width: '300px' }}
+          />
+        </LinkPDP>
 
-export default ProductCard
+        <div css={styles.column}>
+          <LinkPDP linkToPDP={linkToPDP ? `/products/${product.handle}` : null}>
+            <h3 css={styles.productTitle}>{product.title}</h3>
+          </LinkPDP>
+          <span css={styles.productPrice}>{price}</span>
+          <div css={styles.productInteractLayout}>
+            <div css={styles.counterLayout}>
+              <span css={styles.quantity}>{quantity}</span>
+              <div css={styles.counterSwitchLayout}>
+                <button css={styles.counterSwitch} onClick={incrementQty}>
+                  +
+                </button>
+                <button css={styles.counterSwitch} onClick={decrementQty}>
+                  -
+                </button>
+              </div>
+            </div>
+            <button css={styles.addToCartButton} onClick={addItemToCart}>
+              ADD TO CART
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export default ProductCard;
