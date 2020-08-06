@@ -1,11 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import { CartProvider } from 'hooks/use-cart';
 import { Header, Cart, Footer } from 'components';
 
 const Layout = ({ children, space }) => {
   return (
-    <CartProvider>
+    <>
       <Head>
         <title>{space.name}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -18,7 +17,7 @@ const Layout = ({ children, space }) => {
       <Cart />
       <main>{children}</main>
       <Footer space={space} />
-    </CartProvider>
+    </>
   );
 };
 

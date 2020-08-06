@@ -15,13 +15,14 @@ const Header = ({ space }) => {
     <header css={styles.header}>
       <strong css={styles.name}>{space.name}</strong>
       <nav css={styles.nav}>
-        {navItems.map(({ title, to }, idx) => {
-          const isCurrentPage = router.asPath === to;
+        {navItems.map((link, idx) => {
+          const isCurrentPage = router.asPath === link.to;
+          const { href, to } = createLinkHref(link);
 
           return (
-            <Link href={to} key={`${title}-${idx}`}>
+            <Link href={href} as={to} key={`${link.title}-${idx}`}>
               <a css={[styles.navLink, isCurrentPage && { color: '#ee7acb' }]}>
-                {title}
+                {link.title}
               </a>
             </Link>
           );
@@ -46,5 +47,18 @@ const Header = ({ space }) => {
     </header>
   );
 };
+
+function createLinkHref(link) {
+  if (link.type.toLowerCase() === 'page') {
+    return { href: link.to, to: link.to };
+  }
+
+  const base = `/${link.type.toLowerCase()}s`;
+
+  return {
+    href: `${base}/[handle]`,
+    to: `${base}/${link.title.toLowerCase()}`
+  };
+}
 
 export default Header;

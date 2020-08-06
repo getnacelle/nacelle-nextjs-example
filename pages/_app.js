@@ -1,14 +1,17 @@
 import App from 'next/app';
 import React from 'react';
 import { Layout } from 'components';
+import { CartProvider } from 'hooks/use-cart';
 import $nacelle from 'services/nacelle.js';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps, space }) {
   return (
-    <Layout space={space}>
-      <Component {...pageProps} />
-    </Layout>
+    <CartProvider>
+      <Layout space={space}>
+        <Component {...pageProps} />
+      </Layout>
+    </CartProvider>
   );
 }
 
