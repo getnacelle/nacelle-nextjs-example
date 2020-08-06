@@ -1,31 +1,18 @@
 import React from 'react';
-
-const heroStyles = {
-  block: {
-    display: 'grid',
-    placeItems: 'center',
-    marginBottom: '-0.33em'
-  },
-  image: {
-    width: '100vw',
-    objectFit: 'fill'
-  },
-  title: (color) => ({
-    position: 'absolute',
-    color: color,
-    fontSize: '4em',
-    textShadow: '1px 2px darkslategray'
-  })
-};
+import { Image } from 'components';
+import * as styles from './hero-banner.styles';
 
 const HeroBanner = ({ fields, textColor }) => {
   const image = fields.featuredMedia.fields;
   return (
-    <div css={heroStyles.block}>
-      <picture>
-        <img src={image.file.url} css={heroStyles.image} />
-      </picture>
-      <h1 css={heroStyles.title(textColor || '#222')}>{fields.title}</h1>
+    <div css={styles.block}>
+      <Image
+        src={image.file.url}
+        width="2000"
+        styles={styles.image}
+        format={['webp', 'jpg']}
+      />
+      <h1 css={styles.title(textColor || '#222')}>{fields.title}</h1>
     </div>
   );
 };

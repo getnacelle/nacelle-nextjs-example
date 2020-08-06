@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useAddToCart, useFormatPrice } from 'hooks';
+import { Image } from 'components';
 import * as styles from 'styles/products.styles';
 
 const LinkPDP = ({ linkToPDP, children }) => {
@@ -43,10 +44,12 @@ const ProductCard = ({ product, linkToPDP }) => {
     <article>
       <div css={styles.column}>
         <LinkPDP linkToPDP={linkToPDP ? `/products/${product.handle}` : null}>
-          <img
+          <Image
             src={product.featuredMedia.src}
             alt={product.featuredMedia.altText}
-            css={{ maxWidth: '320px', height: '100%', width: '100%' }}
+            width="320"
+            format={['webp', 'jpg']}
+            styles={{ maxWidth: '320px', height: '100%', width: '100%' }}
           />
         </LinkPDP>
 
