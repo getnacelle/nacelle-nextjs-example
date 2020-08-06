@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { Image } from 'components';
 
 import * as styles from './side-by-side.styles';
 
@@ -13,7 +14,12 @@ const SideBySide = ({ fields }) => {
   return (
     <div css={[styles.columnLayout, { flexDirection }]}>
       <section css={styles.column}>
-        <img src={imageSrc} css={styles.image} />
+        <Image
+          src={imageSrc}
+          styles={styles.image}
+          width="1000"
+          format={['webp', 'jpg']}
+        />
       </section>
       <section
         css={[styles.column, { backgroundColor: fields.backgroundColor }]}
