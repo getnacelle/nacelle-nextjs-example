@@ -13,6 +13,12 @@ export const name = {
   color: '#363636'
 };
 
+export const nav = {
+  display: 'flex',
+  minWidth: '50vw',
+  justifyContent: 'space-around'
+};
+
 export const navLink = {
   color: '#3b3b3b'
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import useCart from '../hooks/use-cart';
+import { useCart } from 'hooks';
 import * as styles from './header.styles';
 
 const Header = ({ space }) => {
@@ -11,7 +11,7 @@ const Header = ({ space }) => {
   return (
     <header css={styles.header}>
       <strong css={styles.name}>{space.name}</strong>
-      <nav>
+      <nav css={styles.nav}>
         {navItems.map(({ title, to }, idx) => (
           <Link href={to} key={`${title}-${idx}`}>
             <a>{title}</a>

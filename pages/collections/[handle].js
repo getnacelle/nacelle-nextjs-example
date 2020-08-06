@@ -1,10 +1,10 @@
-import React from 'react'
-import useCollection from 'hooks/use-collection'
-import $nacelle from 'services/nacelle.js'
-import { ProductGallery, ProductCard, Sections } from 'components'
+import React from 'react';
+import $nacelle from 'services/nacelle.js';
+import { useCollection } from 'hooks';
+import { Sections, ProductGallery, ProductCard } from 'components';
 
 const Collection = ({ collection, page }) => {
-  const products = useCollection(collection)
+  const products = useCollection(collection);
   return (
     <>
       {page && <Sections sections={page.sections} />}
@@ -17,7 +17,7 @@ const Collection = ({ collection, page }) => {
   )
 };
 
-export default Collection
+export default Collection;
 
 export async function getStaticPaths() {
   try {
@@ -41,21 +41,21 @@ export async function getStaticProps({ params }) {
     collection = await $nacelle.data
       .collection({
         handle: params.handle
-      })
+      });
   } catch(err) {
-    console.warn(`Problem fetching collection data for collection page with handle '${params.handle}':\n${err}`)
+    console.warn(`Can't find collection with handle '${params.handle}'`)
   }
 
   try {
     page = await $nacelle.data
       .page({
         handle: params.handle
-      })
+      });
   } catch(err) {
-    console.warn(`Problem fetching page data for collection page with handle '${params.handle}':\n${err}`)
+    console.warn(`Can't find page with handle '${params.handle}'`)
   }
 
   return {
     props: { collection, page: page || null }, // will be passed to the page component as props
-  }
+  };
 }
