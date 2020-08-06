@@ -6,3 +6,5 @@ export { default as ProductCard } from './product-card';
 export { default as ProductGallery } from './product-gallery';
 export { default as Sections } from './sections';
 export { default as SideBySide } from './side-by-side';
+export { default as ItemQuantity } from './item-quantity';
+export { default as Footer } from './footer';
