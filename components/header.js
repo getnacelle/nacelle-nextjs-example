@@ -57,7 +57,7 @@ function createLinkHref(link) {
 
   return {
     href: `${base}/[handle]`,
-    to: `${base}/${link.title.toLowerCase()}`
+    to: `${base}/${link.title.replace("'", '').toLowerCase()}`
   };
 }
 
