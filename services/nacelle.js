@@ -44,6 +44,7 @@ const nacelleClient = {
   }
 };
 
+console.log(`GITHUB COMMIT REF: ${process.env.VERCEL_GITHUB_COMMIT_REF}`);
 if (
   (process.env.NACELLE_PREVIEW_MODE ||
     process.env.VERCEL_GITHUB_COMMIT_REF === 'preview') &&
