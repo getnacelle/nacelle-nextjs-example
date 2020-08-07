@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 
 export default function WhenVisible({
   children,
+  height = 200,
   verticalThreshold = 0,
   once = true
 }) {
@@ -11,5 +12,9 @@ export default function WhenVisible({
     triggerOnce: once
   });
 
-  return <span ref={ref}>{inView && children}</span>;
+  return (
+    <div ref={ref} height={height}>
+      {inView && children}
+    </div>
+  );
 }
