@@ -4,6 +4,7 @@ export const columnLayout = {
 
 export const column = {
   maxWidth: '50%',
+  minHeight: '25em',
   display: 'flex'
 };
 
