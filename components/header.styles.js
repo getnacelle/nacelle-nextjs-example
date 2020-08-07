@@ -10,6 +10,8 @@ export const header = {
 
 export const name = {
   textTransform: 'uppercase',
+  textDecoration: 'none',
+  fontWeight: 'bold',
   color: '#363636'
 };
 
