@@ -3,7 +3,7 @@ export const block = {
   placeItems: 'center',
   justifyContent: 'center',
   marginBottom: '-0.33em',
-  width: '100vw'
+  width: '100%'
 };
 
 export const image = {
