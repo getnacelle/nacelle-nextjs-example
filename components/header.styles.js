@@ -14,6 +14,9 @@ export const name = {
 };
 
 export const nav = {
+  '@media screen and (max-width: 768px)': {
+    display: 'none'
+  },
   display: 'flex',
   minWidth: '50vw',
   justifyContent: 'space-around'
@@ -61,6 +64,9 @@ export const cartCount = {
 };
 
 export const mobileMenuButton = {
+  '@media screen and (min-width: 769px)': {
+    display: 'none'
+  },
   position: 'relative',
   display: 'block',
   height: 52,
@@ -81,7 +87,7 @@ export const mobileMenuButton = {
   '& span:first-of-type': {
     top: 'calc(50% - 6px)'
   },
-  '& span:nth-child(2)': {
+  '& span:nth-of-type(2)': {
     top: 'calc(50% - 1px)'
   },
   '& span:last-of-type': {
@@ -90,6 +96,9 @@ export const mobileMenuButton = {
 };
 
 export const mobileNav = {
+  '@media screen and (min-width: 769px)': {
+    display: 'none'
+  },
   width: '100%',
   position: 'fixed',
   top: 0,

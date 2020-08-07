@@ -3,6 +3,11 @@ export const layout = {
 };
 
 export const productGridLayout = {
+  '@media screen and (max-width: 768px)': {
+    gridTemplateColumns: '1fr',
+    columnGap: 0,
+    margin: 0
+  },
   marginLeft: 46,
   marginRight: 46,
   display: 'grid',
@@ -11,6 +16,11 @@ export const productGridLayout = {
 };
 
 export const column = {
+  '@media screen and (max-width: 768px)': {
+    marginTop: 0,
+    width: '100%',
+    maxWidth: '100%'
+  },
   maxWidth: '50vw',
   marginTop: '1.33em'
 };
@@ -20,6 +30,9 @@ export const productImage = {
 };
 
 export const productTitle = {
+  '@media screen and (max-width: 768px)': {
+    marginTop: 12
+  },
   fontSize: 30,
   marginBottom: 16,
   marginTop: 0,
@@ -90,6 +103,11 @@ export const quantity = {
 };
 
 export const detailGridLayout = {
+  '@media screen and (max-width: 768px)': {
+    gridTemplateColumns: '1fr',
+    margin: 0,
+    columnGap: 0
+  },
   marginTop: 48,
   marginLeft: 46,
   marginRight: 46,
@@ -111,8 +129,25 @@ export const gettingText = {
 };
 
 export const gettingLayout = {
+  '@media screen and (max-width: 768px)': {
+    paddingTop: 48,
+    paddingLeft: 0,
+    paddingRight: 0,
+    maxWidth: '100%',
+    marginBottom: 32
+  },
   maxWidth: '80vw',
   paddingTop: 48,
   paddingLeft: 12,
   paddingRight: 12
+};
+
+export const ourProducts = {
+  '@media screen and (max-width: 768px)': {
+    margin: -12,
+    maxWidth: '100%',
+    padding: '12px 12px 32px 12px'
+  },
+  padding: 48,
+  backgroundColor: '#f5f5f5'
 };

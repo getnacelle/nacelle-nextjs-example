@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useCart, useDetectDevice } from 'hooks';
+import { useCart } from 'hooks';
 import * as styles from './header.styles';
 
-const MobileNav = ({ show, navItems, toggleNav, isMobile, title }) => {
+const MobileNav = ({ show, navItems, toggleNav, title }) => {
   const router = useRouter();
-
-  if (!isMobile) {
-    return null;
-  }
 
   const navStateStyle = show ? styles.show : styles.hide;
 
@@ -51,12 +47,8 @@ const MobileNav = ({ show, navItems, toggleNav, isMobile, title }) => {
   );
 };
 
-const DesktopNav = ({ navItems, isMobile }) => {
+const DesktopNav = ({ navItems }) => {
   const router = useRouter();
-
-  if (isMobile) {
-    return null;
-  }
 
   return (
     <nav css={styles.nav}>
@@ -76,25 +68,9 @@ const DesktopNav = ({ navItems, isMobile }) => {
   );
 };
 
-const MobileNavButton = ({ toggleNav, isMobile }) => {
-  if (!isMobile) {
-    return null;
-  }
-
-  return (
-    <button css={styles.mobileMenuButton} onClick={toggleNav}>
-      <span />
-      <span />
-      <span />
-    </button>
-  );
-};
-
 const Header = ({ space }) => {
   const [{ cart }, { toggleCart }] = useCart();
   const [showNav, setShowNav] = useState(false);
-  const { isMobile } = useDetectDevice();
-
   const toggleNav = () => setShowNav((navState) => !navState);
 
   const navItems = space.linklists[0].links;
@@ -102,16 +78,19 @@ const Header = ({ space }) => {
 
   return (
     <header css={styles.header}>
-      <MobileNavButton toggleNav={toggleNav} isMobile={isMobile} />
+      <button css={styles.mobileMenuButton} onClick={toggleNav}>
+        <span />
+        <span />
+        <span />
+      </button>
       <strong css={styles.name}>{space.name}</strong>
       <MobileNav
         show={showNav}
         navItems={navItems}
         toggleNav={toggleNav}
-        isMobile={isMobile}
         title={space.name}
       />
-      <DesktopNav navItems={navItems} isMobile={isMobile} />
+      <DesktopNav navItems={navItems} />
       <button css={styles.cartButton} onClick={toggleCart}>
         <svg
           aria-hidden="true"

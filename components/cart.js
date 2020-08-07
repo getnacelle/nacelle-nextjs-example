@@ -30,14 +30,7 @@ const Cart = () => {
   const checkout = () => getCheckoutData();
 
   return (
-    <div
-      css={[
-        styles.cart,
-        cartStateStyle,
-        !show && { boxShadow: 'none' },
-        isMobile && { width: '100%' }
-      ]}
-    >
+    <div css={[styles.cart, cartStateStyle, !show && { boxShadow: 'none' }]}>
       <header css={styles.cartHeader}>
         <h3 css={styles.cartTitle}>Your Cart</h3>
         <button css={styles.closeButton} onClick={cartActions.toggleCart}>
