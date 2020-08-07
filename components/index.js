@@ -1,4 +1,5 @@
 export { default as Cart } from './cart';
+export { default as DeviceDetector } from './detect-device';
 export { default as Header } from './header';
 export { default as HeroBanner } from './hero-banner';
 export { default as Image } from './image';
