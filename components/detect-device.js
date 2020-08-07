@@ -28,6 +28,7 @@ export default function DeviceDetector({ children }) {
   const device = {
     isMobile,
     isTablet,
+    isTouch: isMobile || isTablet,
     isDesktop,
     isWidescreen,
     isFullHD
