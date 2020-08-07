@@ -66,7 +66,7 @@ const ProductDetail = ({ product }) => {
             compile a holographic simulation?
           </p>
         </div>
-        <div css={{ padding: 48, backgroundColor: '#f5f5f5' }}>
+        <div css={styles.ourProducts}>
           <div>
             <h4 css={styles.gettingTitle}>OUR PRODUCTS</h4>
             <p css={styles.gettingText}>

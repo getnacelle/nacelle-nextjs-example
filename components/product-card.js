@@ -7,7 +7,7 @@ import * as styles from 'styles/products.styles';
 const LinkPDP = ({ linkToPDP, children }) => {
   if (linkToPDP) {
     return (
-      <Link href={linkToPDP}>
+      <Link href="/products/[handle]" as={linkToPDP}>
         <a
           css={{
             textDecoration: 'none',
