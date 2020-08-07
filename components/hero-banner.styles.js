@@ -8,7 +8,7 @@ export const block = {
 
 export const image = {
   width: '100%',
-  objectFit: 'fill'
+  objectFit: 'cover'
 };
 
 export const title = (color, device) => ({
