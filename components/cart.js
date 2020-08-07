@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useCheckout } from '@nacelle/nacelle-react-hooks';
 import { ItemQuantity } from 'components';
 import { formatCurrency } from 'utils';
-import { useCart } from 'hooks';
+import { useCart, useDetectDevice } from 'hooks';
 import * as styles from './cart.styles';
 
 const checkoutCredentials = {
@@ -13,6 +13,7 @@ const checkoutCredentials = {
 
 const Cart = () => {
   const [{ cart, show }, cartActions] = useCart();
+  const { isMobile } = useDetectDevice();
   const [checkoutData, getCheckoutData, isCheckingOut] = useCheckout(
     checkoutCredentials,
     cart.map((item) => ({ variant: { ...item, qty: item.quantity } }))
@@ -29,7 +30,14 @@ const Cart = () => {
   const checkout = () => getCheckoutData();
 
   return (
-    <div css={[styles.cart, cartStateStyle, !show && { boxShadow: 'none' }]}>
+    <div
+      css={[
+        styles.cart,
+        cartStateStyle,
+        !show && { boxShadow: 'none' },
+        isMobile && { width: '100%' }
+      ]}
+    >
       <header css={styles.cartHeader}>
         <h3 css={styles.cartTitle}>Your Cart</h3>
         <button css={styles.closeButton} onClick={cartActions.toggleCart}>
@@ -41,7 +49,12 @@ const Cart = () => {
       </header>
       <section css={styles.cartItems}>
         {cart.map((item) => (
-          <CartItem item={item} key={item.id} cartActions={cartActions} />
+          <CartItem
+            item={item}
+            key={item.id}
+            cartActions={cartActions}
+            isMobile={isMobile}
+          />
         ))}
       </section>
       <footer css={styles.subTotalFooter}>
@@ -61,7 +74,7 @@ const Cart = () => {
   );
 };
 
-const CartItem = ({ item, cartActions }) => {
+const CartItem = ({ item, cartActions, isMobile }) => {
   const [itemQuantity, updateQuantity] = useState(item.quantity || 0);
 
   const incrementQty = () => {
@@ -87,15 +100,25 @@ const CartItem = ({ item, cartActions }) => {
   return (
     <div css={styles.cartItem}>
       <Link href={`/products/${item.handle}`}>
-        <a css={styles.thumbnailContainer}>
+        <a css={[styles.thumbnailContainer, isMobile && { paddingLeft: 0 }]}>
           <img css={styles.cartItemThumbnail} src={item.image.thumbnailSrc} />
         </a>
       </Link>
 
       <div css={[styles.column, { width: '100%' }]}>
-        <h4 css={styles.cartItemTitle}>{item.title}</h4>
+        <div css={styles.cartItemTitleLayout}>
+          <h4 css={styles.cartItemTitle}>{item.title}</h4>
+          {isMobile && (
+            <span css={[styles.cartItemPrice, { flexGrow: 0 }]}>
+              {formatCurrency(item.price)}
+            </span>
+          )}
+        </div>
+
         <div css={styles.productInteractLayout}>
-          <span css={styles.cartItemPrice}>{formatCurrency(item.price)}</span>
+          {!isMobile && (
+            <span css={styles.cartItemPrice}>{formatCurrency(item.price)}</span>
+          )}
           <ItemQuantity
             quantity={itemQuantity}
             incrementFn={incrementQty}

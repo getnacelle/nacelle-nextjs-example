@@ -1,33 +1,117 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useCart } from 'hooks';
+import { useCart, useDetectDevice } from 'hooks';
 import * as styles from './header.styles';
 
-const Header = ({ space }) => {
+const MobileNav = ({ show, navItems, toggleNav, isMobile, title }) => {
   const router = useRouter();
-  const [{ cart }, { toggleCart }] = useCart();
-  const navItems = space.linklists[0].links;
-  const showCartCount = cart.length > 0;
+
+  if (!isMobile) {
+    return null;
+  }
+
+  const navStateStyle = show ? styles.show : styles.hide;
 
   return (
-    <header css={styles.header}>
-      <strong css={styles.name}>{space.name}</strong>
-      <nav css={styles.nav}>
+    <nav
+      css={[styles.mobileNav, navStateStyle, !show && { boxShadow: 'none' }]}
+    >
+      <div css={styles.mobileNavHeader}>
+        <button css={styles.closeButton} onClick={toggleNav}>
+          <img
+            css={styles.closeIcon}
+            src="https://nacelle-assets.s3-us-west-2.amazonaws.com/default-close-icon.svg"
+          />
+        </button>
+        <strong>{title}</strong>
+      </div>
+      <div css={styles.mobileNavItems}>
         {navItems.map((link, idx) => {
           const isCurrentPage = router.asPath === link.to;
           const { href, to } = createLinkHref(link);
 
           return (
             <Link href={href} as={to} key={`${link.title}-${idx}`}>
-              <a css={[styles.navLink, isCurrentPage && { color: '#ee7acb' }]}>
+              <a
+                onClick={toggleNav}
+                css={[
+                  styles.mobileNavLink,
+                  isCurrentPage && { color: '#ee7acb' }
+                ]}
+              >
                 {link.title}
               </a>
             </Link>
           );
         })}
-      </nav>
+      </div>
+    </nav>
+  );
+};
+
+const DesktopNav = ({ navItems, isMobile }) => {
+  const router = useRouter();
+
+  if (isMobile) {
+    return null;
+  }
+
+  return (
+    <nav css={styles.nav}>
+      {navItems.map((link, idx) => {
+        const isCurrentPage = router.asPath === link.to;
+        const { href, to } = createLinkHref(link);
+
+        return (
+          <Link href={href} as={to} key={`${link.title}-${idx}`}>
+            <a css={[styles.navLink, isCurrentPage && { color: '#ee7acb' }]}>
+              {link.title}
+            </a>
+          </Link>
+        );
+      })}
+    </nav>
+  );
+};
+
+const MobileNavButton = ({ toggleNav, isMobile }) => {
+  if (!isMobile) {
+    return null;
+  }
+
+  return (
+    <button css={styles.mobileMenuButton} onClick={toggleNav}>
+      <span />
+      <span />
+      <span />
+    </button>
+  );
+};
+
+const Header = ({ space }) => {
+  const [{ cart }, { toggleCart }] = useCart();
+  const [showNav, setShowNav] = useState(false);
+  const { isMobile } = useDetectDevice();
+
+  const toggleNav = () => setShowNav((navState) => !navState);
+
+  const navItems = space.linklists[0].links;
+  const showCartCount = cart.length > 0;
+
+  return (
+    <header css={styles.header}>
+      <MobileNavButton toggleNav={toggleNav} isMobile={isMobile} />
+      <strong css={styles.name}>{space.name}</strong>
+      <MobileNav
+        show={showNav}
+        navItems={navItems}
+        toggleNav={toggleNav}
+        isMobile={isMobile}
+        title={space.name}
+      />
+      <DesktopNav navItems={navItems} isMobile={isMobile} />
       <button css={styles.cartButton} onClick={toggleCart}>
         <svg
           aria-hidden="true"

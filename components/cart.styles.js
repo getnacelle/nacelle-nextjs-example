@@ -147,3 +147,8 @@ export const subtotalPrice = {
   fontFamily: 'Source Sans Pro',
   fontWeight: 600
 };
+
+export const cartItemTitleLayout = {
+  display: 'flex',
+  justifyContent: 'space-between'
+};
