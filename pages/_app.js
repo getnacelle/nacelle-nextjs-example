@@ -1,6 +1,6 @@
 import App from 'next/app';
 import React from 'react';
-import { Layout } from 'components';
+import { Layout, DeviceDetector } from 'components';
 import { CartProvider } from 'hooks/use-cart';
 import $nacelle from 'services/nacelle.js';
 import '../styles/globals.css';
@@ -8,9 +8,11 @@ import '../styles/globals.css';
 function MyApp({ Component, pageProps, space }) {
   return (
     <CartProvider>
-      <Layout space={space}>
-        <Component {...pageProps} />
-      </Layout>
+      <DeviceDetector>
+        <Layout space={space}>
+          <Component {...pageProps} />
+        </Layout>
+      </DeviceDetector>
     </CartProvider>
   );
 }
