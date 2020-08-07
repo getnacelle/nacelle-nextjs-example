@@ -1,19 +1,35 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Image } from 'components';
+import { useDetectDevice } from 'hooks';
 
 import * as styles from './side-by-side.styles';
 
 const SideBySide = ({ fields }) => {
   const router = useRouter();
+  const device = useDetectDevice();
   const textContent = findTextContent(fields.content.content);
   const imageSrc = fields.featuredMedia.fields.file.url;
-  const flexDirection = fields.reverseDesktop ? 'row-reverse' : 'row';
+  const flexDirectionMobile = fields.reverseMobile
+    ? 'column-reverse'
+    : 'column';
+  const flexDirectionDesktop = fields.reverseDesktop ? 'row-reverse' : 'row';
   const routeToCtaPage = () => router.push(fields.ctaUrl);
 
   return (
-    <div css={[styles.columnLayout, { flexDirection }]}>
-      <section css={styles.column}>
+    <div
+      css={[
+        styles.columnLayout,
+        {
+          flexDirection: device.isTouch
+            ? flexDirectionMobile
+            : flexDirectionDesktop
+        }
+      ]}
+    >
+      <section
+        css={(styles.column, { maxWidth: device.isTouch ? 'unset' : '50%' })}
+      >
         <Image
           src={imageSrc}
           styles={styles.image}
@@ -22,7 +38,13 @@ const SideBySide = ({ fields }) => {
         />
       </section>
       <section
-        css={[styles.column, { backgroundColor: fields.backgroundColor }]}
+        css={[
+          styles.column,
+          {
+            maxWidth: device.isTouch ? 'unset' : '50%',
+            backgroundColor: fields.backgroundColor
+          }
+        ]}
       >
         <div css={styles.content}>
           <h3 css={styles.title}>{fields.title}</h3>

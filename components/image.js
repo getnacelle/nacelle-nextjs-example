@@ -249,7 +249,14 @@ function optimizeSource({
   }
 }
 
-export default function Image({ src, alt, width, format = 'jpg', styles }) {
+export default function Image({
+  src,
+  alt,
+  width,
+  format = 'jpg',
+  lazy = true,
+  styles
+}) {
   // Available formats: 'jpg', 'webp', 'png'
   const formats = Array.isArray(format) ? format : [format];
 
@@ -266,7 +273,7 @@ export default function Image({ src, alt, width, format = 'jpg', styles }) {
           type={`image/${format}`}
         />
       ))}
-      <img src={src} alt={alt} css={styles} />
+      <img src={src} alt={alt} css={styles} lazy={lazy} />
     </picture>
   );
 }

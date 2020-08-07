@@ -21,7 +21,7 @@ export const column = {
     width: '100%',
     maxWidth: '100%'
   },
-  maxWidth: '50vw',
+  maxWidth: '65vw',
   marginTop: '1.33em'
 };
 
