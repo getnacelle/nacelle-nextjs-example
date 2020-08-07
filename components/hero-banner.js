@@ -8,7 +8,7 @@ const HeroBanner = ({ fields, textColor }) => {
     <div css={styles.block}>
       <Image
         src={image.file.url}
-        width="2000"
+        width="1800"
         styles={styles.image}
         format={['webp', 'jpg']}
       />
