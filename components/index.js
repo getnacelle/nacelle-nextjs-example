@@ -10,4 +10,3 @@ export { default as Sections } from './sections';
 export { default as SideBySide } from './side-by-side';
 export { default as ItemQuantity } from './item-quantity';
 export { default as Footer } from './footer';
-export { default as WhenVisible } from './when-visible';

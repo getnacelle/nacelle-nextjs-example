@@ -273,7 +273,7 @@ export default function Image({
           type={`image/${format}`}
         />
       ))}
-      <img src={src} alt={alt} css={styles} lazy={lazy} />
+      <img src={src} alt={alt} css={styles} loading={lazy && 'lazy'} />
     </picture>
   );
 }
