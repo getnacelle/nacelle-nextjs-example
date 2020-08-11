@@ -104,7 +104,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const product = await $nacelle.data.product({ handle: params.handle });
-  const space = await $nacelle.data.space();
 
-  return { props: { product, space } };
+  return { props: { product } };
 }
