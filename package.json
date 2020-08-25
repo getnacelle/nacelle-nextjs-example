@@ -10,7 +10,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@nacelle/contentful-preview-connector": "^0.1.4",
-    "@nacelle/nacelle-react-hooks": "^1.0.8",
+    "@nacelle/react-hooks": "^2.0.4",
     "@react-hook/media-query": "^1.1.1",
     "next": "9.5.1",
     "react": "16.13.1",

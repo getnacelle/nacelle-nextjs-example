@@ -1,33 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useCheckout } from '@nacelle/nacelle-react-hooks';
+import { useCheckout } from '@nacelle/react-hooks';
 import { ItemQuantity } from 'components';
 import { formatCurrency } from 'utils';
 import { useCart, useDetectDevice } from 'hooks';
 import * as styles from './cart.styles';
 
 const checkoutCredentials = {
-  nacelle_space_id: process.env.NACELLE_SPACE_ID,
-  nacelle_graphql_token: process.env.NACELLE_GRAPHQL_TOKEN
+  nacelleSpaceId: process.env.NACELLE_SPACE_ID,
+  nacelleGraphqlToken: process.env.NACELLE_GRAPHQL_TOKEN
 };
 
 const Cart = () => {
   const [{ cart, show }, cartActions] = useCart();
   const { isMobile } = useDetectDevice();
-  const [checkoutData, getCheckoutData, isCheckingOut] = useCheckout(
+  const [checkoutData, checkout, isCheckingOut] = useCheckout(
     checkoutCredentials,
     cart.map((item) => ({ variant: { ...item, qty: item.quantity } }))
   );
 
   useEffect(() => {
     if (checkoutData) {
-      const { processCheckout } = checkoutData.data.data;
+      const { processCheckout } = checkoutData.data;
       window.location = processCheckout.url;
     }
   }, [checkoutData]);
 
   const cartStateStyle = show ? styles.show : styles.hide;
-  const checkout = () => getCheckoutData();
 
   return (
     <div css={[styles.cart, cartStateStyle, !show && { boxShadow: 'none' }]}>
